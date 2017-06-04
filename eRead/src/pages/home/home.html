@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-navbar [color]="'ebook'">
+    <ion-title>书架</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+
+  <ion-card class="book-list" *ngFor="let title of book_titles; let i = index" (click)="readBook()">
+    <ion-card-content class="book-list-content">
+      <img src="assets/img/book{{i}}.jpg" />
+    </ion-card-content>
+    <ion-card-content class="book-list-item">
+      <h2>{{title}}</h2>
+      <p>{{book_author[i]}}</p>
+      <p>{{book_info[i]}}</p>
+      <ion-row class="book-list-button">
+        <ion-col>
+          <button ion-button icon-left clear small (click)="addLikeNumber($event,i)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{like_number[i]}} Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small (click)="goToComments($event)">
+            <ion-icon name="text"></ion-icon>
+            <div> Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+ <!-- <ion-card class="book-list">
+    <ion-card-content class="book-list-content">
+      <img src="assets/img/book0.jpg" />
+    </ion-card-content>
+
+    <ion-card-content class="book-list-item">
+      <h2>数据库设计与关系理论</h2>
+      <p>【英】戴特</p>
+      <p>数据库设计领域的经典之作</p>
+      <ion-row class="book-list-button">
+        <ion-col>
+          <button ion-button icon-left clear small (click)="addLikeNumber($event,1)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>8 Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div> Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="book-list">
+    <ion-card-content class="book-list-content">
+      <img src="assets/img/book1.jpg" />
+    </ion-card-content>
+
+    <ion-card-content class="book-list-item">
+      <h2>Software Engineering</h2>
+      <p>【美】Ian Sommerville</p>
+      <p>For courses in computer science and software engineering</p>
+      <ion-row class="book-list-button">
+        <ion-col>
+          <button ion-button icon-left clear small (click)="addLikeNumber($event,2)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>11 Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div> Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="book-list">
+    <ion-card-content class="book-list-content">
+      <img src="assets/img/book.jpg" />
+    </ion-card-content>
+
+    <ion-card-content class="book-list-item">
+      <h2>移动应用UI设计模式</h2>
+      <p>【美】Theresa Neil</p>
+      <p>简易的移动应用UI模式参考书。</p>
+      <ion-row class="book-list-button">
+        <ion-col>
+          <button ion-button icon-left clear small (click)="addLikeNumber($event,3)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>25 Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div> Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>-->
+</ion-content>

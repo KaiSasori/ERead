@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar [color]="'ebook'">
+    <ion-title>{{bookname}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card class="book-read" (click)="goToNextPage()">
+    <ion-card-content>
+      <p *ngFor="let c of content;let i = index">
+      <!--<p *ngFor="let c of content;let i = index" (click)="presentActionSheet(i)">-->
+        {{c}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

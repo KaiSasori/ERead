@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar [color]="'ebook'">
+    <ion-title>评论</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+  <ion-card (click)="addComments()">
+    <ion-item>
+      <h2>添加评论</h2>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngFor="let num of comment;let i = index">
+    <ion-item>
+      <h2>{{num[0]}}</h2>
+      <p> {{num[1]}}</p>
+      <p> {{num[2]}}</p>
+      <ion-avatar item-right>
+        <ion-icon name="create" (click)="addAnswers(i)"></ion-icon>
+      </ion-avatar>
+    </ion-item>
+
+    <ion-card-content>
+      <p *ngFor="let answer of answers[i]">
+        {{answer}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
