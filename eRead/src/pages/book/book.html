@@ -8,9 +8,9 @@
 
 
 <ion-content padding>
-  <ion-card class="book-read" (click)="goToNextPage()">
+  <ion-card class="book-read" (swipe)="goToNextPage()">
     <ion-card-content>
-      <p *ngFor="let c of content;let i = index">
+      <p *ngFor="let c of content;let i = index" (click)="presentActionSheet(i)">
       <!--<p *ngFor="let c of content;let i = index" (click)="presentActionSheet(i)">-->
         {{c}}
       </p>

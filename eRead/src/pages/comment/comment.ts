@@ -66,6 +66,9 @@ export class CommentPage {
         {
           text: 'Save',
           handler: data => {
+            if(this.answers[index] == null){
+              this.answers[index] = [];
+            }
             this.answers[index].push("Kaiv BB：" + data.answer);
             console.log(data);
           }

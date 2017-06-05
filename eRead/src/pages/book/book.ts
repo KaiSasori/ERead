@@ -15,6 +15,7 @@ export class BookPage {
   bookname:string;
 
   content: string[];
+  current_page:number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,
               public actionSheetCtrl: ActionSheetController,public alertCtrl: AlertController,
@@ -23,6 +24,7 @@ export class BookPage {
 
     this.storage.get('current_page').then((val) => {
       console.log(val);
+      this.current_page = val;
       this.storage.get('book_content' + val).then((value) => {
         console.log(value);
         this.content = value;
@@ -33,16 +35,19 @@ export class BookPage {
   goToNextPage(){
     this.storage.get('current_page').then((val) => {
       console.log(val);
+      this.current_page = val;
       this.storage.get('book_content' + (val + 1)).then((value) => {
         console.log(value);
         if (value === null){
           this.storage.set('current_page',0);
+          this.current_page = 0;
           this.storage.get('book_content0').then((valuex) => {
             this.content = valuex;
           });
         }else{
           this.content = value;
           this.storage.set('current_page',(val + 1));
+          this.current_page = val + 1;
         }
       });
     });
@@ -56,6 +61,7 @@ export class BookPage {
           text: '书签',
           handler: () => {
             console.log('书签');
+            this.bookmark(this.content[index]);
           }
         },{
           text: '笔记',
@@ -66,6 +72,7 @@ export class BookPage {
           text: '提问',
           handler: () => {
             console.log('提问');
+            this.askQuestion(this.content[index]);
           }
         },{
           text: '运行代码',
@@ -83,6 +90,54 @@ export class BookPage {
       ]
     });
     actionSheet.present();
+  }
+
+  bookmark(code) {
+    /*var b = [];
+    b.push("Python基础教程");
+    b.push("2017-06-04");
+    b.push(code);
+    b.push(this.current_page);
+    this.storage.get('bookmark_num').then((val) => {
+      console.log("meow:" + val);
+      this.storage.set('bookmark_content'+ val,b);
+      this.storage.set('bookmark_num',val + 1);
+    });*/
+  }
+
+  askQuestion(code){
+    let prompt = this.alertCtrl.create({
+      title: '问题',
+      message: "填写问题",
+      inputs: [
+        {
+          name: 'question',
+          placeholder: 'Question'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            var c = [];
+            c.push(data.question);
+            c.push("2017-06-04");
+            c.push("原文：" + code);
+            this.storage.get('comment_num').then((val) => {
+              this.storage.set('comment_content'+ val,c);
+              this.storage.set('comment_num',val + 1);
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   compileCode(code) {
@@ -107,8 +162,13 @@ export class BookPage {
       });
       alert.present();
     },error => {
-      console.log("error!");
-      console.log(error);
+      this.loading.dismiss();
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: error,
+        buttons: ['OK']
+      });
+      alert.present();
     });
   }
 
